@@ -26,7 +26,8 @@ html {
     width: 100px;
   }
                   
-  .form-row > input {
+  .form-row > input,
+  .form-row > select {
     padding: .5em;
     flex-grow: 1;
   }
@@ -87,5 +88,6 @@ html {
     font-size: 20px;
     border-radius: 25px;
     margin: 30px;
+    max-width: 100%;
    }
   

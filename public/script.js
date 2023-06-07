@@ -10,7 +10,7 @@ form.addEventListener("submit", function (event) {
         form.elements.taskType.value,
         form.elements.taskRate.value,
         form.elements.taskTime.value,
-        form.elements.taskClient.value,
+        form.elements.taskClient.value
     )
 })
 
@@ -19,7 +19,7 @@ function displayTasks() {
   tasklist.innerHTML = "";
 
   let localTasks = JSON.parse(localStorage.getItem('tasks'));
-
+ 
   if (localTasks != null) {
 
     localTasks.forEach((task) =>  {
@@ -60,6 +60,7 @@ function displayTasks() {
     })
 }
 }
+
 // Function to add task to the list
 function addTask(name, type, rate, time, client) {
 
