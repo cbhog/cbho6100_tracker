@@ -66,24 +66,27 @@ form.addEventListener("submit", function (event) {
 
 
 const taskTypeImages = {
-    Chest:"/images/muscles-chest.png",
-    Shoulders: "/images/muscles-chest.png",
-    Triceps: "/images/muscles-tri.png",
+    Chest:"./images/muscles-chest.png",
+    Shoulders: "./images/muscles-chest.png",
+    Triceps: "./images/muscles-tri.png",
 };
 
-function test(){
-    var mainCanvas = document.getElementById("mainCanvas");
-    var logoImage = new Image();
-
-    logoImage.onload = loadingDone;      // here before setting src
-
-    logoImage.src = "/images/muscles-chest.png";
-
-    function loadingDone() {             // gets called when done
-        alert(logoImage.width);
-        mainCanvas.getContext("2d").drawImage(logoImage, 0, 0);
-    }
+function testImage(URL) {
+  var tester=new Image();
+  tester.onload=imageFound;
+  tester.onerror=imageNotFound;
+  tester.src=URL;
 }
+
+function imageFound() {
+  alert('That image is found and loaded');
+}
+
+function imageNotFound() {
+  alert('That image was not found.');
+}
+
+testImage("public\images\muscles-chest.png");
 
 
 function displayTasks() {
@@ -108,7 +111,10 @@ function displayTasks() {
         let details = document.createElement("div");
         details.innerHTML = `
           <strong>${task.name}</strong><br>
-          <span>${task.type}</span>
+          <span>${task.type}</span><br>
+          <span>Weight: ${task.rate} kg</span><br>
+          <span>Reps: ${task.client}</span><br>
+          <span>Sets: ${task.time}</span>
         `;
         item.appendChild(details);
   
@@ -142,6 +148,7 @@ function displayTasks() {
       tasklist.classList.add("no-tasks"); // Add CSS class to tasklist when there are no tasks
     }
   }
+  
   
   //q: why is there a div before we add the task?
 
