@@ -1,12 +1,13 @@
 html {
     height: 100%;
     width: 100%;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: #1B263B;
   }
                   
   header > h1 {
     text-align: center;
+    color: #E0E1DD;
   }
                   
   form {
@@ -14,12 +15,14 @@ html {
     margin: 0 auto;
     border: 2px solid grey;
     padding: 2em 1em;
+    background-color: #778DA9;
   }
                   
   .form-row {
     display: flex;
     justify-content: flex-end;
     padding: .5em;
+    color: #0D1B2A;
   }
                   
   .form-row > label {
@@ -28,9 +31,23 @@ html {
                   
   .form-row > input,
   .form-row > select {
-    padding: .5em;
+    padding: 1em;
     flex-grow: 1;
   }
+
+  h2 {
+    text-align: center;
+    color: #E0E1DD;
+  }
+
+  #tasklist {
+    max-width: 500px;
+    margin: 0 auto;
+    border: 2px solid grey;
+    padding: 2em 1em;
+    background-color: #778DA9;
+  }
+
 
   /* landing page styles */
   .container-contact {  display: grid;
