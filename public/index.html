@@ -6,17 +6,20 @@
   <meta name="viewport" content="width=device-width">
   <title>JS Task List</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <header><h1>Task Tracker</h1></header>
+  <header><h1>Workout Tracker</h1></header>
   <form id="taskform">
     <div class="form-row">
       <label for="taskName">Exercise Name</label>
       <input type="text" name="taskName" id="taskName" required="true" />
     </div>
     <div class="form-row">
-      <label for="taskType">Muscle Group</label>
+      <label for="taskType">Muscle Groups</label>
       <select name="taskType" id="taskType" required="true">
         <option value="">Select an option</option>
         <option value="Chest">Chest</option>
@@ -41,7 +44,7 @@
     </div>
   </form>
   <h2>Tasks</h2>
-  <ul id="tasklist"></ul>
+  <div id="tasklist"></ul>
   <a href='landing.html'>Back to Landing Page</a>
   <script src="script.js"></script>
 </body>
