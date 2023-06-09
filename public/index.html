@@ -20,33 +20,32 @@
       </header>
     </div>
 
-
+    <!-- Push section -->
     <div class="push-sec" id="push-sec">
       <h1 class="exercise-titles">Push</h1>
       <h2 class="exercise-subtits">Chest/Shoulders/Triceps</h2>
       <img src="./images/muscles-push.png" alt="push muscles" class="push-img">
     </div>
 
-
-
+    <!-- Pull section -->
     <div class="pull-sec" id="pull-sec">
       <h1 class="exercise-titles">Pull</h1>
       <h2 class="exercise-subtits">Back/Biceps</h2>
       <img src="./images/muscles-pull.png" alt="pull muscles" class="pull-img">
     </div>
 
-
-
+    <!-- Legs section -->
     <div class="legs-sec" id="legs-sec">
       <h1 class="exercise-titles">Legs</h1>
       <h2 class="exercise-subtits">Quads/Hamstrings/Calves</h2>
       <img src="./images/muscles-legs.png" alt="leg muscles" class="legs-img">
     </div>
-
-
-
   </div>
 
+  <!-- Task form and input fields -->
+  <header id="monty">
+    <h2 id="taskTitle">Click above what muscle groups you're doing today</h2>
+  </header>
   <form id="taskform">
     <div class="form-row">
       <label for="taskName">Exercise Name</label>
@@ -78,10 +77,18 @@
       <input type="submit" />
     </div>
   </form>
-  <h2>Tasks</h2>
+
+  <!-- Task list -->
+  <h2 id="mongo">Exercises</h2>
   <ul id="tasklist"></ul>
+  
+  <!-- Link to go back to the landing page -->
   <a href='landing.html'>Back to Landing Page</a>
+  
+  <!-- Task modal dialog -->
   <dialog id="task-modal"></dialog>
+
+  <!-- JavaScript file -->
   <script src="script.js"></script>
 </body>
 
