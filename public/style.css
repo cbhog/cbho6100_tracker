@@ -1,108 +1,233 @@
 html {
-    height: 100%;
-    width: 100%;
-    font-family: 'Inter', sans-serif;
-    background-color: #1B263B;
-  }
-                  
-  header > h1 {
-    text-align: center;
-    color: #E0E1DD;
-  }
-                  
-  form {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 2em 1em;
-    background-color: #778DA9;
-  }
-                  
-  .form-row {
-    display: flex;
-    justify-content: flex-end;
-    padding: .5em;
-    color: #0D1B2A;
-  }
-                  
-  .form-row > label {
-    width: 100px;
-  }
-                  
-  .form-row > input,
-  .form-row > select {
-    padding: 1em;
-    flex-grow: 1;
-  }
+  height: 100%;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: #1B263B;
+}
 
-  h2 {
-    text-align: center;
-    color: #E0E1DD;
-  }
+body {
+  margin: 0;
+  padding: 0;
+}
 
-  #tasklist {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 2em 1em;
-    background-color: #778DA9;
-  }
+header > h1 {
+  text-align: center;
+  color: #E0E1DD;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2em 1em;
+  background-color: #778DA9;
+}
+
+.form-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: .5em;
+  color: #0D1B2A;
+}
+
+.form-row > label {
+  width: 100px;
+}
+
+.form-row > input,
+.form-row > select {
+  padding: 1em;
+  flex-grow: 1;
+}
+
+h2 {
+  text-align: center;
+  color: #E0E1DD;
+}
+
+#tasklist {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2em 1em;
+}
+
+/* landing page styles */
+.container-contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 2% 2%;
+  grid-auto-flow: column;
+  justify-content: stretch;
+  justify-items: stretch;
+  align-items: stretch;
+  width: 100%;
+  height: auto; 
+  background-color: #1B263B;
+  grid-template-areas:
+    "theader theader theader"
+    "push-sec pull-sec legs-sec"
+    "push-sec pull-sec legs-sec";
+}
+
+.theader {
+  grid-area: theader;
+  background-color: #1B263B;
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+  color: #E0E1DD;
+}
+
+.push-sec {
+  grid-area: push-sec;
+  background-color: #415A77;
+  text-align: center;
+  color: #E0E1DD;
+  padding: 0px;
+  font-size: 20px;
+  border-radius: 25px;
+  margin: 0px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.pull-sec {
+  grid-area: pull-sec;
+  background-color: #415A77;
+  text-align: center;
+  color: #E0E1DD;
+  padding: 0px;
+  font-size: 20px;
+  border-radius: 25px;
+  margin: 0px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.legs-sec {
+  grid-area: legs-sec;
+  background-color: #415A77;
+  text-align: center;
+  color: #E0E1DD;
+  padding: 0px;
+  font-size: 20px;
+  border-radius: 25px;
+  margin: 0px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.push-sec:hover,
+.pull-sec:hover,
+.legs-sec:hover {
+  cursor: pointer;
+  background-color: #5C84B2;
+}
 
 
-  /* landing page styles */
-  .container-contact {  display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-auto-columns: 1fr;
-    grid-auto-rows: 1fr;
-    gap: 0% 0%;
-    grid-auto-flow: column;
-    justify-content: stretch;
-    justify-items: stretch;
-    align-items: stretch;
-    width: 100%;
-    height: auto; 
-    background-color: #1B263B;
-    grid-template-areas:
-      "theader theader theader"
-      "push-sec pull-sec legs-sec"
-      "push-sec pull-sec legs-sec";
+  
+/* Modal styles */
+#task-modal {
+  background-color: #fff;
+  padding: 1em;
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   }
   
-  .theader { grid-area: theader;
-    background-color: #1B263B;
-    text-align: center;
-    padding: 20px;
-    font-size: 30px;
-    color: #E0E1DD;
-   }
-  
-  .push-sec { grid-area: push-sec;
-    background-color: #415A77;
-    text-align: center;
-    color: #E0E1DD;
-    padding: 20px;
-    font-size: 20px;
-    border-radius: 25px;
-    margin: 30px;
-   }
 
-  .pull-sec { grid-area: pull-sec;
-    background-color: #415A77;
-    text-align: center;
-    color: #E0E1DD;
-    padding: 20px;
-    font-size: 20px;
-    border-radius: 25px;
-    margin: 30px;
-   }
-  
-  .legs-sec { grid-area: legs-sec;
-    background-color: #415A77;
-    text-align: center;
-    color: #E0E1DD;
-    padding: 20px;
-    font-size: 20px;
-    border-radius: 25px;
-    margin: 30px;
-    max-width: 100%;
-   }
-  
+/* Modal close button */
+button#closeModal {
+  margin-top: 1em;
+}
+
+/* Modal delete button */
+button#deleteTask {
+  margin-top: 1em;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+}
+
+/* Note form styles */
+form#noteForm {
+  margin-top: 1em;
+}
+
+form#noteForm label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+form#noteForm input[type="text"] {
+  padding: 0.5em;
+  width: 100%;
+  border-radius: 5px;
+}
+
+form#noteForm button[type="submit"] {
+  margin-top: 0.5em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+}
+
+dialog {
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+}
+
+dialog::backdrop {
+  background-color: transparent;
+}
+
+li {
+  position: relative;
+}
+
+li button {
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+li:hover button {
+  opacity: 1;
+}
+
+.task-item {
+  background-color: #778DA9;
+  padding: 1em;
+  margin-bottom: 1em;
+  position: relative;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.edit-button {
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.task-item:hover .edit-button {
+  opacity: 1;
+}
+
+.task-item.hovered {
+  background-color: #A9C7EE;
+  cursor: pointer;
+}
