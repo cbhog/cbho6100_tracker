@@ -2,13 +2,11 @@
 const taskForm = document.getElementById("taskform");
 const taskList = document.getElementById("tasklist");
 const taskModal = document.getElementById("task-modal");
-const pushButton = document.getElementById("pushButton");
-const pullButton = document.getElementById("pullButton");
-const legsButton = document.getElementById("legsButton");
 const pushSection = document.getElementById("push-sec");
 const pullSection = document.getElementById("pull-sec");
 const legsSection = document.getElementById("legs-sec");
 const taskTypeSelect = document.getElementById("taskType");
+const taskTitle = document.getElementById("taskTitle");
 
 // Initialize tasks array
 let tasks = [];
@@ -23,16 +21,23 @@ if (storedTasks) {
 // Update muscle group options based on section click
 pushSection.addEventListener("click", () => {
   updateMuscleGroupOptions("Chest", "Shoulders", "Triceps");
+  updateTaskTitle("Push");
+  scrollToTracker();
 });
 
 pullSection.addEventListener("click", () => {
   updateMuscleGroupOptions("Back", "Biceps");
+  updateTaskTitle("Pull");
+  scrollToTracker();
 });
 
 legsSection.addEventListener("click", () => {
   updateMuscleGroupOptions("Quads", "Hamstrings", "Calves");
+  updateTaskTitle("Legs");
+  scrollToTracker();
 });
 
+// Function to update the muscle group options in the task form
 function updateMuscleGroupOptions(...options) {
   // Clear existing options
   taskTypeSelect.innerHTML = "";
@@ -46,6 +51,18 @@ function updateMuscleGroupOptions(...options) {
   });
 }
 
+// Function to update the task title in the form
+function updateTaskTitle(title) {
+  taskTitle.textContent = title;
+}
+
+// Function to scroll to the task tracker section
+function scrollToTracker() {
+  const trackerSection = document.getElementById("taskform");
+  trackerSection.scrollIntoView({ behavior: "smooth" });
+}
+
+// Function to render the list of tasks
 function renderTasks() {
   // Clear task list
   taskList.innerHTML = "";
@@ -67,19 +84,19 @@ function renderTasks() {
     const taskName = document.createElement("h4");
     taskName.textContent = task.name;
 
+    const taskSetsReps = document.createElement("p");
+    taskSetsReps.textContent = `${task.time} x ${task.client}`;
+
     const taskWeight = document.createElement("p");
     taskWeight.innerHTML = `Weight: <span id="taskWeight-${index}">${task.rate}</span> ${task.metric}`;
 
-    const taskSets = document.createElement("p");
-    taskSets.textContent = `Sets: ${task.time}`;
-
-    const taskReps = document.createElement("p");
-    taskReps.textContent = `Reps: ${task.client}`;
+    const taskDate = document.createElement("p");
+    taskDate.textContent = `Date Added: ${task.dateAdded}`;
 
     taskItem.appendChild(taskName);
+    taskItem.appendChild(taskSetsReps);
     taskItem.appendChild(taskWeight);
-    taskItem.appendChild(taskSets);
-    taskItem.appendChild(taskReps);
+    taskItem.appendChild(taskDate);
 
     // Open the modal on task item click
     taskItem.addEventListener("click", () => showTaskDetails(index));
@@ -89,22 +106,15 @@ function renderTasks() {
   });
 }
 
-
+// Function to show task details in the modal
 function showTaskDetails(index) {
   const task = tasks[index];
   const modalContent = `
     <h3>${task.name}</h3>
     <p>Muscle Group: ${task.type}</p>
+    <p>Sets x Reps: ${task.time} x ${task.client}</p>
     <p>Weight: <span id="taskWeight">${task.rate}</span> ${task.metric}</p>
-    <p>Sets: ${task.time}</p>
-    <p>Reps: ${task.client}</p>
-    <h4>Notes</h4>
-    <ul>${task.notes.map((note) => `<li>${note}</li>`).join("")}</ul>
-    <form id="noteForm">
-      <label for="noteInput">Add Note:</label>
-      <input type="text" id="noteInput" required />
-      <button type="submit">Add</button>
-    </form>
+    <p>Date Added: ${task.dateAdded}</p>
     <button id="deleteTask">Delete</button>
     <button id="closeModal">Close</button>
   `;
@@ -112,34 +122,26 @@ function showTaskDetails(index) {
   taskModal.innerHTML = modalContent;
   taskModal.showModal();
 
-  // Handle note submission
-  const noteForm = document.getElementById("noteForm");
-  noteForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const noteInput = document.getElementById("noteInput");
-    const note = noteInput.value.trim();
-    if (note) {
-      task.notes.push(note);
-      showTaskDetails(index); // Re-render the modal to display the updated notes
-      noteInput.value = ""; // Clear the note input field
-      saveTasks(); // Save tasks to local storage
-    }
-  });
+  // Remove previous event listeners
+  const deleteButton = document.getElementById("deleteTask");
+  const closeModalButton = document.getElementById("closeModal");
+  deleteButton.removeEventListener("click", deleteTask);
+  closeModalButton.removeEventListener("click", closeModal);
 
   // Handle task deletion
-  const deleteButton = document.getElementById("deleteTask");
-  deleteButton.addEventListener("click", () => {
-    tasks.splice(index, 1); // Remove the task from the array
-    renderTasks(); // Re-render the tasks list
-    saveTasks(); // Save tasks to local storage
-    taskModal.close(); // Close the modal
-  });
+  function deleteTask() {
+    tasks.splice(index, 1);
+    renderTasks();
+    saveTasks();
+    taskModal.close();
+  }
+  deleteButton.addEventListener("click", deleteTask);
 
   // Handle modal close
-  const closeModalButton = document.getElementById("closeModal");
-  closeModalButton.addEventListener("click", () => {
+  function closeModal() {
     taskModal.close();
-  });
+  }
+  closeModalButton.addEventListener("click", closeModal);
 }
 
 // Function to add a new task
@@ -154,7 +156,7 @@ function addTask(event) {
   const taskClient = document.getElementById("taskClient").value;
   const taskMetric = document.getElementById("taskMetric").value;
 
-  // Create a new task object
+  // Create a new task object with the current date
   const newTask = {
     name: taskName,
     type: taskType,
@@ -163,6 +165,7 @@ function addTask(event) {
     time: taskTime,
     client: taskClient,
     notes: [],
+    dateAdded: new Date().toLocaleDateString(),
   };
 
   // Add the new task to the tasks array
