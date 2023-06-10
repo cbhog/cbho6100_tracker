@@ -1,12 +1,12 @@
 // Get references to HTML elements
-const taskForm = document.getElementById("taskform");
-const taskList = document.getElementById("tasklist");
-const taskModal = document.getElementById("task-modal");
-const pushSection = document.getElementById("push-sec");
-const pullSection = document.getElementById("pull-sec");
-const legsSection = document.getElementById("legs-sec");
-const taskTypeSelect = document.getElementById("taskType");
-const taskTitle = document.getElementById("taskTitle");
+const taskForm = document.getElementById("taskform"); // Reference to the task form element
+const taskList = document.getElementById("tasklist"); // Reference to the task list element
+const taskModal = document.getElementById("task-modal"); // Reference to the task details modal element
+const pushSection = document.getElementById("push-sec"); // Reference to the push section element
+const pullSection = document.getElementById("pull-sec"); // Reference to the pull section element
+const legsSection = document.getElementById("legs-sec"); // Reference to the legs section element
+const taskTypeSelect = document.getElementById("taskType"); // Reference to the task type select element
+const taskTitle = document.getElementById("taskTitle"); // Reference to the task title element
 
 // Initialize tasks array
 let tasks = [];
@@ -37,7 +37,6 @@ legsSection.addEventListener("click", () => {
   scrollToTracker();
 });
 
-// Function to update the muscle group options in the task form
 function updateMuscleGroupOptions(...options) {
   // Clear existing options
   taskTypeSelect.innerHTML = "";
@@ -51,18 +50,15 @@ function updateMuscleGroupOptions(...options) {
   });
 }
 
-// Function to update the task title in the form
 function updateTaskTitle(title) {
   taskTitle.textContent = title;
 }
 
-// Function to scroll to the task tracker section
 function scrollToTracker() {
   const trackerSection = document.getElementById("taskform");
   trackerSection.scrollIntoView({ behavior: "smooth" });
 }
 
-// Function to render the list of tasks
 function renderTasks() {
   // Clear task list
   taskList.innerHTML = "";
@@ -93,10 +89,16 @@ function renderTasks() {
     const taskDate = document.createElement("p");
     taskDate.textContent = `Date Added: ${task.dateAdded}`;
 
+    const taskImage = document.createElement("img");
+    taskImage.src = getMuscleGroupImage(task.type);
+    taskImage.alt = task.name;
+    taskImage.classList.add("task-image");
+
     taskItem.appendChild(taskName);
     taskItem.appendChild(taskSetsReps);
     taskItem.appendChild(taskWeight);
     taskItem.appendChild(taskDate);
+    taskItem.appendChild(taskImage);
 
     // Open the modal on task item click
     taskItem.addEventListener("click", () => showTaskDetails(index));
@@ -106,7 +108,29 @@ function renderTasks() {
   });
 }
 
-// Function to show task details in the modal
+function getMuscleGroupImage(muscleGroup) {
+  switch (muscleGroup) {
+    case "Chest":
+      return "images/muscles-chest.png";
+    case "Shoulders":
+      return "images/muscles-chest.png";
+    case "Triceps":
+      return "C:/Users/chand/OneDrive - The University of Sydney (Students)/Desktop/cbho6100_tracker/public/images/muscles-tri.png";
+    case "Back":
+      return "images/muscles-back.png";
+    case "Biceps":
+      return "images/muscles-bicep.png";
+    case "Quads":
+      return "images/muscles-quad.png";
+    case "Hamstrings":
+      return "images/muscles-hamcalf.png";
+    case "Calves":
+      return "images/muscles-hamcalf.png";
+    default:
+      return "path/to/default-image.jpg";
+  }
+}
+
 function showTaskDetails(index) {
   const task = tasks[index];
   const modalContent = `
@@ -115,6 +139,11 @@ function showTaskDetails(index) {
     <p>Sets x Reps: ${task.time} x ${task.client}</p>
     <p>Weight: <span id="taskWeight">${task.rate}</span> ${task.metric}</p>
     <p>Date Added: ${task.dateAdded}</p>
+    <img src="${getMuscleGroupImage(task.type)}" alt="${task.name}" class="task-modal-image">
+
+    <h4>Feedback</h4>
+    <p>${getFeedback(task.time, task.client)}</p>
+
     <button id="deleteTask">Delete</button>
     <button id="closeModal">Close</button>
   `;
@@ -144,11 +173,29 @@ function showTaskDetails(index) {
   closeModalButton.addEventListener("click", closeModal);
 }
 
-// Function to add a new task
+function getFeedback(sets, reps) {
+  let feedback = "";
+
+  if (reps < 8) {
+    feedback += "Depending on your goals, increase the amount of reps to 8-12. Train close or to failure with good form to maximise hypertrophy. ";
+  }
+
+  if (reps >= 10 && reps <= 12) {
+    feedback += "Consider increasing weight. ";
+  }
+
+  if (sets > 4) {
+    feedback += "Consider dropping the number of sets to 3-4 and increase weight to train with higher intensity.";
+  }
+
+  return feedback;
+}
+
+
+
 function addTask(event) {
   event.preventDefault();
 
-  // Get input values
   const taskName = document.getElementById("taskName").value;
   const taskType = document.getElementById("taskType").value;
   const taskRate = document.getElementById("taskRate").value;
@@ -156,7 +203,12 @@ function addTask(event) {
   const taskClient = document.getElementById("taskClient").value;
   const taskMetric = document.getElementById("taskMetric").value;
 
-  // Create a new task object with the current date
+  // Validate sets and reps inputs
+  if (taskTime <= 0 || taskClient <= 0 || taskRate <= 0) {
+    alert("Values must be positive.");
+    return; // Exit the function if validation fails
+  }
+
   const newTask = {
     name: taskName,
     type: taskType,
@@ -168,23 +220,21 @@ function addTask(event) {
     dateAdded: new Date().toLocaleDateString(),
   };
 
-  // Add the new task to the tasks array
   tasks.push(newTask);
 
-  // Render tasks
   renderTasks();
 
-  // Clear form inputs
   taskForm.reset();
 
-  // Save tasks to local storage
   saveTasks();
 }
 
-// Function to save tasks to local storage
+
 function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// Event listener for form submission
+
+
+
 taskForm.addEventListener("submit", addTask);

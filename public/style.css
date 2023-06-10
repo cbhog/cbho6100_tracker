@@ -1,22 +1,29 @@
+/* Styles for the overall HTML structure and basic elements. */
 html {
   height: 100%;
   width: 100%;
   font-family: 'Inter', sans-serif;
   background-color: #1B263B;
 }
-/* Setting the height, width, font-family, and background color for the HTML element */
 
 body {
   margin: 0;
   padding: 0;
 }
-/* Removing margin and padding from the body element */
 
 header > h1 {
   text-align: center;
   color: #E0E1DD;
 }
-/* Centering the text and setting the color for h1 elements within the header */
+
+/* Styles for the form section. */
+
+#taskTitle {
+  font-size: 30px;
+  color: #E0E1DD;
+  text-align: center;
+  margin-bottom: 20px;
+}
 
 form {
   max-width: 500px;
@@ -24,8 +31,8 @@ form {
   margin-bottom: 100px;
   padding: 2em 1em;
   background-color: #778DA9;
+  border-radius: 15px;
 }
-/* Styling the form with a maximum width of 500px, centered horizontally, with padding and a background color */
 
 .form-row {
   display: flex;
@@ -33,40 +40,40 @@ form {
   padding: .5em;
   color: #0D1B2A;
 }
-/* Creating a flex container for form rows, aligning them to the right, and setting padding and text color */
 
 .form-row > label {
   width: 100px;
+  font-size: 15px;
+  font-weight: 600;
 }
-/* Setting a fixed width for labels within form rows */
 
 .form-row > input,
 .form-row > select {
   padding: 1em;
   flex-grow: 1;
 }
-/* Setting padding and allowing inputs and selects to grow within form rows */
 
 h2 {
   text-align: center;
   color: #E0E1DD;
 }
-/* Centering the text and setting the color for h2 elements */
 
+/* Styles for the task list. */
 #tasklist {
   max-width: 500px;
   margin: 0 auto;
   padding: 2em 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
 }
-/* Setting a maximum width for the task list, centering it horizontally, and providing padding */
 
 #mongo {
   font-size: 30px;
 }
-/* Setting the font size for the element with ID "mongo" */
 
+/* Styles for the landing page. */
 .container-contact {
-  /* Styling for the container with class "container-contact" */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -85,38 +92,192 @@ h2 {
     "push-sec pull-sec legs-sec"
     "push-sec pull-sec legs-sec";
 }
-/* Creating a grid layout for the container and defining its grid template areas */
 
-.push-sec,
-.pull-sec,
-.legs-sec {
-  /* Styling for the elements with classes "push-sec", "pull-sec", and "legs-sec" */
-  font-size: 16px;
-  margin-bottom: 1em;
-  padding: 1em;
-  box-sizing: border-box;
-}
-
-.push-sec,
-.pull-sec {
-  margin-right: 1em;
-}
-/* Setting margin-right for elements with classes "push-sec" and "pull-sec" */
-
-#monty {
-  /* Styling for the element with ID "monty" */
-  margin-top: 50%;
+.theader {
+  grid-area: theader;
+  background-color: #1B263B;
   text-align: center;
-  position: relative;
-  transform: translateY(-50%);
-  transform: translateX(25%);
+  padding: 20px;
+  font-size: 30px;
+  color: #E0E1DD;
 }
-/* Centering the element vertically using margin-top and transform properties */
 
+.push-sec {
+  grid-area: push-sec;
+  background-color: #415A77;
+  text-align: center;
+  color: #E0E1DD;
+  padding: 0px;
+  font-size: 20px;
+  border-radius: 25px;
+  margin: 0px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.pull-sec {
+  grid-area: pull-sec;
+  background-color: #415A77;
+  text-align: center;
+  color: #E0E1DD;
+  padding: 0px;
+  font-size: 20px;
+  border-radius: 25px;
+  margin: 0px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.legs-sec {
+  grid-area: legs-sec;
+  background-color: #415A77;
+  text-align: center;
+  color: #E0E1DD;
+  padding: 0px;
+  font-size: 20px;
+  border-radius: 25px;
+  margin: 0px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.push-sec:hover,
+.pull-sec:hover,
+.legs-sec:hover {
+  cursor: pointer;
+  background-color: #5C84B2;
+}
+
+
+#task-modal {
+  background-color: #23272c;
+  padding: 2em;
+  border-radius: 8px;
+  border: 2px solid #E0E1DD; 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #E0E1DD;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+
+
+/* Modal close button */
+button#closeModal {
+  margin-top: 1em;
+  background-color: #E0E1DD;
+  color: #1B263B;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+}
+
+/* Modal delete button */
+button#deleteTask {
+  margin-top: 1em;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+}
+
+/* Note form styles */
+form#noteForm {
+  margin-top: 1em;
+}
+
+form#noteForm label {
+  display: block;
+  margin-bottom: 0.5em;
+  color: #E0E1DD;
+}
+
+form#noteForm input[type="text"] {
+  padding: 0.5em;
+  width: 100%;
+  border-radius: 5px;
+}
+
+form#noteForm button[type="submit"] {
+  margin-top: 0.5em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+}
+
+/* Adjust the modal styles as per your requirement */
+
+
+dialog {
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+}
+
+dialog::backdrop {
+  background-color: transparent;
+}
+
+li {
+  position: relative;
+}
+
+li button {
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+li:hover button {
+  opacity: 1;
+}
+
+.task-item {
+  background-color: #778DA9;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+  position: relative;
+  transition: background-color 0.3s ease-in-out;
+  text-align: center;
+}
+
+#taskName {
+  font-size: 15px;
+}
+
+.edit-button {
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.task-item:hover .edit-button {
+  opacity: 1;
+}
+
+.task-item.hovered {
+  background-color: #A9C7EE;
+  cursor: pointer;
+}
+
+/* iPhone XR */
 @media only screen and (max-width: 414px) {
-  /* Styles specific to screens with a maximum width of 414px (e.g., iPhone XR) */
+  /* Adjust the styles as per your requirement */
   .container-contact {
-    /* Modifying the layout of the container for smaller screens */
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     grid-template-areas:
@@ -130,7 +291,6 @@ h2 {
   .push-sec,
   .pull-sec,
   .legs-sec {
-    /* Adjusting font size, margin, and padding for smaller screens */
     font-size: 16px;
     margin-bottom: 1em;
     padding: 1em;
@@ -143,7 +303,6 @@ h2 {
   }
 
   #monty {
-    /* Modifying the positioning of the element for smaller screens */
     margin-top: 50%;
     text-align: center;
     position: relative;
@@ -152,27 +311,28 @@ h2 {
   }
 
   #taskTitle {
-    /* Adjusting font size and alignment for smaller screens */
     font-size: 24px;
     margin-bottom: 1em;
     text-align: center;
   }
 
   #tasklist {
-    /* Modifying the positioning of the element for smaller screens */
     padding: 1em;
     transform: translateY(-50%);
     transform: translateX(25%);
   }
 
+  #tasklist h2 {
+    font-size: 24px;
+    margin-bottom: 1em;
+  }
+
   form {
-    /* Adjusting padding and margin for smaller screens */
     padding: 1em;
     margin-bottom: 2em;
   }
 
   .form-row {
-    /* Modifying the layout of form rows for smaller screens */
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -181,27 +341,22 @@ h2 {
   }
 
   .form-row > label {
-    /* Modifying the width and margin for labels within form rows for smaller screens */
     width: 100px;
     margin-right: 1em;
   }
 
   .form-row > input,
   .form-row > select {
-    /* Allowing inputs and selects to grow within form rows for smaller screens */
     flex-grow: 1;
     min-width: 0;
   }
 
   #taskform {
-    /* Modifying the margin-bottom and positioning of the element for smaller screens */
-    margin-bottom: 5em;
+    margin-bottom: 5em; /* Increase the margin-bottom value to provide more space */
     transform: translateY(-50%);
     transform: translateX(25%);
   }
-  
   #mongo {
-    /* Modifying the positioning of the element for smaller screens */
     margin-top: 5%;
     text-align: center;
     position: relative;
@@ -210,12 +365,11 @@ h2 {
   }
   
   #taskRate {
-    /* Adjusting the width of the element for smaller screens */
     width: 30%;
   }
   
   #taskMetric {
-    /* Adjusting the width of the element for smaller screens */
-    width: 10%;
+  width: 10%;
   }
 }
+
